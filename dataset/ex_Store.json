@@ -1,0 +1,127 @@
+{
+	"name": "ex_Store",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Store"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "DS CH",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Danh sách cửa hàng.xlsx",
+				"folderPath": "Stores",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Store_key",
+				"type": "String"
+			},
+			{
+				"name": "Store_id",
+				"type": "String"
+			},
+			{
+				"name": "Store_name",
+				"type": "String"
+			},
+			{
+				"name": "Store_acronym",
+				"type": "String"
+			},
+			{
+				"name": "Whosale",
+				"type": "String"
+			},
+			{
+				"name": "Warehouse",
+				"type": "String"
+			},
+			{
+				"name": "Store_group",
+				"type": "String"
+			},
+			{
+				"name": "Store_format",
+				"type": "String"
+			},
+			{
+				"name": "store_level",
+				"type": "String"
+			},
+			{
+				"name": "Store_segment",
+				"type": "String"
+			},
+			{
+				"name": "Status",
+				"type": "String"
+			},
+			{
+				"name": "Opening_date",
+				"type": "String"
+			},
+			{
+				"name": "Closed_date",
+				"type": "String"
+			},
+			{
+				"name": "Store_asm",
+				"type": "String"
+			},
+			{
+				"name": "Store_manager",
+				"type": "String"
+			},
+			{
+				"name": "Area",
+				"type": "String"
+			},
+			{
+				"name": "Number_of_staff",
+				"type": "String"
+			},
+			{
+				"name": "Mail",
+				"type": "String"
+			},
+			{
+				"name": "Phone",
+				"type": "String"
+			},
+			{
+				"name": "Address1",
+				"type": "String"
+			},
+			{
+				"name": "Address2",
+				"type": "String"
+			},
+			{
+				"name": "Ward",
+				"type": "String"
+			},
+			{
+				"name": "District",
+				"type": "String"
+			},
+			{
+				"name": "Province",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

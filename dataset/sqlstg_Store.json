@@ -1,0 +1,50 @@
+{
+	"name": "sqlstg_Store",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Store"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "district",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ward",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address2",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_store"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

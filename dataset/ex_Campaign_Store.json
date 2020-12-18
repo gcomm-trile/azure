@@ -1,0 +1,59 @@
+{
+	"name": "ex_Campaign_Store",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Campaign"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Promotion_store",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Quan ly chuong trinh KM.xlsx",
+				"folderPath": "Campaigns",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Mã CH",
+				"type": "String"
+			},
+			{
+				"name": "Tên CH",
+				"type": "String"
+			},
+			{
+				"name": "Mã chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Tên chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Từ",
+				"type": "String"
+			},
+			{
+				"name": "Đến",
+				"type": "String"
+			},
+			{
+				"name": "Ngân sách phân bổ",
+				"type": "String"
+			},
+			{
+				"name": "Chỉ tiêu phân bổ",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

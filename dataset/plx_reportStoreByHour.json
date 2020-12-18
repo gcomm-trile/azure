@@ -1,0 +1,39 @@
+{
+	"name": "plx_reportStoreByHour",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PalaxyAPI",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"startDate": {
+				"type": "string"
+			},
+			"endDate": {
+				"type": "string"
+			},
+			"storeId": {
+				"type": "string"
+			},
+			"gender": {
+				"type": "string"
+			},
+			"ageGroup": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Palaxy"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('https://ica.palexy.com/api/v2/customeractivity/report/chart?api_key=VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc&storeId=',dataset().storeId,'&startDate=',dataset().startDate,'&endDate=',dataset().endDate,'&chartGroupBy=hour&metric=visit&gender=',dataset().gender,'&ageRanges=',dataset().ageGroup)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

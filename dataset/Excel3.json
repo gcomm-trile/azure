@@ -1,0 +1,66 @@
+{
+	"name": "Excel3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Download ces couple tx",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Data",
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "ces/admin/download/2020/12-02/TonKho_12-02-2020-f054af30-3428-11eb-92b1-3f3f723405df.xlsx"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Tên chi nhánh",
+				"type": "String"
+			},
+			{
+				"name": "Quận/Huyện",
+				"type": "String"
+			},
+			{
+				"name": "Tỉnh/TP",
+				"type": "String"
+			},
+			{
+				"name": "Sản phẩm",
+				"type": "String"
+			},
+			{
+				"name": "SKU",
+				"type": "String"
+			},
+			{
+				"name": "Barcode",
+				"type": "String"
+			},
+			{
+				"name": "Số lượng tồn",
+				"type": "String"
+			},
+			{
+				"name": "Số lượng đặt",
+				"type": "String"
+			},
+			{
+				"name": "Số lượng mua",
+				"type": "String"
+			},
+			{
+				"name": "Số lượng khả dụng",
+				"type": "String"
+			},
+			{
+				"name": "Trạng thái tồn kho",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

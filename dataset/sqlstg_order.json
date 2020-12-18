@@ -1,0 +1,356 @@
+{
+	"name": "sqlstg_order",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Order"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "created_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "source_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "customer_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gateway",
+				"type": "nvarchar"
+			},
+			{
+				"name": "currency",
+				"type": "nvarchar"
+			},
+			{
+				"name": "financial_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ref_order_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "confirmed_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "confirmed_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "cancelled_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cancelled_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "cancelled_reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "closed_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "closed_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "discount_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discount_amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "discount_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discount_is_coupon_code",
+				"type": "bit"
+			},
+			{
+				"name": "total_weight",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "subtotal_price",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_line_items_price",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_discounts",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_tax",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_price",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "shipping_fee",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "landing_site",
+				"type": "nvarchar"
+			},
+			{
+				"name": "referring_site",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_offline",
+				"type": "bit"
+			},
+			{
+				"name": "updated_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "date_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "date_year",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "date_month",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "date_day",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "time_hour",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "time_min",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "order_customer_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_promotion",
+				"type": "bit"
+			},
+			{
+				"name": "shipping_address_address1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_address2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_company",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_first_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_last_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_latitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "shipping_address_longitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "shipping_address_phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_zip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_province_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_country_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_district_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_district",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_ward_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_address_ward",
+				"type": "nvarchar"
+			},
+			{
+				"name": "redeem_model_used_amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "redeem_model_discount_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "redeem_model_discount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "redeem_model_max_per_order",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "redeem_model_amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "redeem_model_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "landing_site_ref",
+				"type": "nvarchar"
+			},
+			{
+				"name": "refund",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "total_bill",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "actual_revenue",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "note",
+				"type": "nvarchar"
+			},
+			{
+				"name": "page",
+				"type": "nvarchar"
+			},
+			{
+				"name": "session_id",
+				"type": "uniqueidentifier"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_order"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

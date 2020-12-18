@@ -1,0 +1,248 @@
+{
+	"name": "ETL Inventory",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy from dl to staging",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "Inventory/TonKho",
+							"wildcardFileName": "*.xlsx"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE dbo.staging_inventory",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Ngày",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Ngày",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Store_id",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SKU",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SKU",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Số lượng tồn",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Số lượng tồn",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Số lượng đặt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Số lượng đặt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Số lượng mua",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Số lượng mua",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Số lượng khả dụng",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Số lượng khả dụng",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Trạng thái tồn kho",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Trạng thái tồn kho",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chi nhánh",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Tên chi nhánh",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Quận/Huyện",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Quận/Huyện",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tỉnh/TP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Tỉnh/TP",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Barcode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Barcode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sản phẩm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Sản phẩm",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_tonkho",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_inventory",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "run sp_updateInventory",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "copy from dl to staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateInventory]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Inventory"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-04T10:10:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

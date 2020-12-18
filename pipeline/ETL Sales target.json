@@ -1,0 +1,1039 @@
+{
+	"name": "ETL Sales target",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load data sale target excel from DL2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_sales_targetsale",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Jan",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jan",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Feb",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Feb",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Mar",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mar",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Apr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apr",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "May",
+									"type": "String"
+								},
+								"sink": {
+									"name": "May",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jun",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jun",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jul",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jul",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Aug",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aug",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Sep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sep",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Oct",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Oct",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Nov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nov",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Dec",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dec",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_sales_targetsale",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_sales_targetsale",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Load data conversion rate target excel from DL2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_sales_converstion_rate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Jan",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jan",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Feb",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Feb",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Mar",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mar",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Apr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apr",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "May",
+									"type": "String"
+								},
+								"sink": {
+									"name": "May",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jun",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jun",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jul",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jul",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Aug",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aug",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Sep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sep",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Oct",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Oct",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Nov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nov",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Dec",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dec",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_sales_conversion_rate_target",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_sales_converstion_rate",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Load data average bill target excel from DL2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_sales_average_bill_target",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Jan",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jan",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Feb",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Feb",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Mar",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mar",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Apr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apr",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "May",
+									"type": "String"
+								},
+								"sink": {
+									"name": "May",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Jun",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jun",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Jul",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jul",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Aug",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aug",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Sep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sep",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Oct",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Oct",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Nov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nov",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Dec",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dec",
+									"type": "Int64"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_sales_average_bill_target",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_sales_average_bill_target",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Run sp_updateSaleTarget",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Load data conversion rate target excel from DL2DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load data sale target excel from DL2DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load data average bill target excel from DL2DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load data count bill target excel from DL2DW_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load data footfall target excel from DL2DW_copy1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateSaleTarget]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Load data count bill target excel from DL2DW_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_sales_bill_target",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Jan",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jan",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Feb",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Feb",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Mar",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mar",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Apr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apr",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "May",
+									"type": "String"
+								},
+								"sink": {
+									"name": "May",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jun",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jun",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jul",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jul",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Aug",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aug",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Sep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sep",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Oct",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Oct",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Nov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nov",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Dec",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dec",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_sales_bill_target",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_sales_bill",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Load data footfall target excel from DL2DW_copy1_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_sales_footfall_target",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Year",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Store_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Jan",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jan",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Feb",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Feb",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Mar",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mar",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Apr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Apr",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "May",
+									"type": "String"
+								},
+								"sink": {
+									"name": "May",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jun",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jun",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Jul",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Jul",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Aug",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Aug",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Sep",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sep",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Oct",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Oct",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Nov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nov",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Dec",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dec",
+									"type": "Decimal"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_sales_footfall_target",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_sales_footfall",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Haravan/Sale Target"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-26T10:07:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

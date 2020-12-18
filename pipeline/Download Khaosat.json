@@ -1,0 +1,266 @@
+{
+	"name": "Download Khaosat",
+	"properties": {
+		"description": "Download Khaosat",
+		"activities": [
+			{
+				"name": "Set temp page init",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "temp_page",
+					"value": {
+						"value": "@pipeline().parameters.lastest_downloaded_page",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Download Data Change",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Set temp page init",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set survey_id",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals('1',variables('is_stop'))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Set page",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "current_page",
+								"value": {
+									"value": "@string(add(int(variables('temp_page')),1))",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set temp",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Copy data",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "temp_page",
+								"value": {
+									"value": "@variables('current_page')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Copy data",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set page",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "af_KhaoSat",
+									"type": "DatasetReference",
+									"parameters": {
+										"surveyId": {
+											"value": "@variables('survey_id')",
+											"type": "Expression"
+										},
+										"page": {
+											"value": "@variables('current_page')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "khaosat",
+									"type": "DatasetReference",
+									"parameters": {
+										"survey_id": {
+											"value": "@pipeline().parameters.survey_id",
+											"type": "Expression"
+										},
+										"page": {
+											"value": "@variables('current_page')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "check stop",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "set rows copied",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(variables('row_copied'),'0')",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "set is stop is false",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "is_stop",
+											"value": "0"
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "set is stop is true",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "is_stop",
+											"value": "1"
+										}
+									}
+								]
+							}
+						},
+						{
+							"name": "set rows copied",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set temp",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "row_copied",
+								"value": {
+									"value": "@string(activity('Copy data').output.rowsCopied)\n",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"timeout": "7.00:00:00"
+				}
+			},
+			{
+				"name": "Set survey_id",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "survey_id",
+					"value": {
+						"value": "@pipeline().parameters.survey_id",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"survey_id": {
+				"type": "string",
+				"defaultValue": " "
+			},
+			"lastest_downloaded_page": {
+				"type": "string",
+				"defaultValue": " "
+			}
+		},
+		"variables": {
+			"current_page": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"temp_page": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"is_stop": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"row_copied": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"survey_id": {
+				"type": "String",
+				"defaultValue": " "
+			}
+		},
+		"folder": {
+			"name": "khaosat"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-03T04:44:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

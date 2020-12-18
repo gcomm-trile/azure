@@ -1,0 +1,291 @@
+{
+	"name": "Load Fullfillment",
+	"properties": {
+		"activities": [
+			{
+				"name": "Polybase from DataLake2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:30:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate TABLE dbo.staging_order_fullfillment",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['fulfillment_id']"
+								},
+								"sink": {
+									"name": "fulfillment_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_id']"
+								},
+								"sink": {
+									"name": "order_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['status']"
+								},
+								"sink": {
+									"name": "status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['fulfillment_status']"
+								},
+								"sink": {
+									"name": "fulfillment_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tracking_company_code']"
+								},
+								"sink": {
+									"name": "tracking_company_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tracking_number']"
+								},
+								"sink": {
+									"name": "tracking_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['carrier_status']"
+								},
+								"sink": {
+									"name": "carrier_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['carrier_cod_status']"
+								},
+								"sink": {
+									"name": "carrier_cod_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cod_amount']"
+								},
+								"sink": {
+									"name": "cod_amount",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ready_to_pick_date']"
+								},
+								"sink": {
+									"name": "ready_to_pick_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['picking_date']"
+								},
+								"sink": {
+									"name": "picking_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['delivering_date']"
+								},
+								"sink": {
+									"name": "delivering_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['delivered_date']"
+								},
+								"sink": {
+									"name": "delivered_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['return_date']"
+								},
+								"sink": {
+									"name": "return_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['not_meet_customer_date']"
+								},
+								"sink": {
+									"name": "not_meet_customer_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['waiting_for_return_date']"
+								},
+								"sink": {
+									"name": "waiting_for_return_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cod_paid_date']"
+								},
+								"sink": {
+									"name": "cod_paid_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cod_receipt_date']"
+								},
+								"sink": {
+									"name": "cod_receipt_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cod_pending_date']"
+								},
+								"sink": {
+									"name": "cod_pending_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cod_not_receipt_date']"
+								},
+								"sink": {
+									"name": "cod_not_receipt_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cancel_date']"
+								},
+								"sink": {
+									"name": "cancel_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['carrier_code']"
+								},
+								"sink": {
+									"name": "carrier_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['page']"
+								},
+								"sink": {
+									"name": "page",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "af_Order_Fullfillment",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_order_fullfillment",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Haravan/Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-10T06:55:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

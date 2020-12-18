@@ -1,0 +1,336 @@
+{
+	"name": "ETL Promotion",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load promotion excel",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE staging_campaign",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã chương trình",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mã chương trình",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chương trình",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tên chương trình",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mô tả",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mô tả",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nhóm chương trình",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Nhóm chương trình",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Hình thức KM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Hình thức KM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Từ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Từ",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Đến",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Đến",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngân sách",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Ngân sách",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Mục tiêu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mục tiêu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Chỉ tiêu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Chỉ tiêu",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Áp dụng",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Áp dụng",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Thực chi",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Thực chi",
+									"type": "Int64"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Campaign",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_CampaignExcel",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Load promotion store excel",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE staging_campaign_store",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã CH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mã CH",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên CH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tên CH",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mã chương trình",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Mã chương trình",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chương trình",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tên chương trình",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Từ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Từ",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Đến",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Đến",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngân sách phân bổ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Ngân sách phân bổ",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Chỉ tiêu phân bổ",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Chỉ tiêu phân bổ",
+									"type": "Int64"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Campaign_Store",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_CampaignStoreExcel",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Run sp_updatePromotion",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Load promotion excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load promotion store excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateCampaign]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Haravan/Promotion"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-23T11:33:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

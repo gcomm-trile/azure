@@ -1,0 +1,75 @@
+{
+	"name": "ex_LuongPhanBoDonHang",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Luồng phân bổ đơn hàng"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Order management",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Luồng phân bổ đơn hàng.xlsx",
+				"folderPath": "Luồng phân bổ đơn hàng",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Rule_no",
+				"type": "String"
+			},
+			{
+				"name": "Store_recoded",
+				"type": "String"
+			},
+			{
+				"name": "Store_recoded_name",
+				"type": "String"
+			},
+			{
+				"name": "Store_source_id",
+				"type": "String"
+			},
+			{
+				"name": "Store_source_name",
+				"type": "String"
+			},
+			{
+				"name": "Source_name",
+				"type": "String"
+			},
+			{
+				"name": "utm_source",
+				"type": "String"
+			},
+			{
+				"name": "product_name",
+				"type": "String"
+			},
+			{
+				"name": "note",
+				"type": "String"
+			},
+			{
+				"name": "product_per_sku",
+				"type": "String"
+			},
+			{
+				"name": "customer_is_wholesale",
+				"type": "String"
+			},
+			{
+				"name": "Priority",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

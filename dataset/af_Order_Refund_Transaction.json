@@ -1,0 +1,22 @@
+{
+	"name": "af_Order_Refund_Transaction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_Function",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Order"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "flattenRefundTransaction",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

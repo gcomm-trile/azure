@@ -1,0 +1,46 @@
+{
+	"name": "ETL Product from Haravan",
+	"properties": {
+		"activities": [
+			{
+				"name": "Download source to DL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Download Product",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load DL2DW",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Download source to DL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Product from DL2DW",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Haravan/Product"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-06-03T07:39:50Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

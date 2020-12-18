@@ -1,0 +1,30 @@
+{
+	"name": "dim_Char1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "char1_key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "char1",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dim_variant_char1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

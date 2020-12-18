@@ -1,0 +1,366 @@
+{
+	"name": "Download OrderJson",
+	"properties": {
+		"description": "Tải data Order từ Haravan",
+		"activities": [
+			{
+				"name": "Get count of page",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Set updated_at_min",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set updated_at_max",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://apis.haravan.com/com/orders/count.json?updated_at_min=',variables('updated_at_min'),'&updated_at_max=',variables('updated_at_max'))",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"headers": {
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@variables('authorization_key')",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Set total page",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get count of page",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "total_page",
+					"value": {
+						"value": "@string(activity('Get count of page').output.count)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Delete All Old Files",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "copy old files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "js_OrderAll",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					}
+				}
+			},
+			{
+				"name": "Set updated_at_min",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "updated_at_min",
+					"value": {
+						"value": "@concat(formatDateTime(addhours(adddays(utcnow(),-3),14),'yyyy-MM-dd'),'T17:00:00.000Z')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Download Data Change",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Set total page",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Delete All Old Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greaterOrEquals(    mul(   int(variables('current_page'))        ,50   )               ,int(variables('total_page')))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Set current page",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "current_page",
+								"value": {
+									"value": "@string(add(int(variables('temp_page')),1))",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set temp",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Download data by current page",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "temp_page",
+								"value": {
+									"value": "@variables('current_page')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Download data by current page",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Set current page",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"Content-Type": "application/json",
+										"Authorization": "Bearer H2eTnjWF6DUyuhh5SXaYtjie42HSHv_IWbaOk6hIQJo"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "hrv_Order",
+									"type": "DatasetReference",
+									"parameters": {
+										"index_page": {
+											"value": "@variables('current_page')",
+											"type": "Expression"
+										},
+										"updated_at_min": {
+											"value": "@variables('updated_at_min')",
+											"type": "Expression"
+										},
+										"updated_at_max": {
+											"value": "@variables('updated_at_max')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "js_Order",
+									"type": "DatasetReference",
+									"parameters": {
+										"page": {
+											"value": "@variables('current_page')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					],
+					"timeout": "7.00:00:00"
+				}
+			},
+			{
+				"name": "Set updated_at_max",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "updated_at_max",
+					"value": {
+						"value": "@concat(formatDateTime(utcnow(),'yyyy-MM-dd'),'T23:00:00.000Z')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "copy old files",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "order_json",
+							"wildcardFileName": "*.json"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "js_OrderAll",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "copybydate",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Download null pos date",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Download Data Change",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Download null pos date",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"current_page": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"temp_page": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"total_page": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"updated_at_min": {
+				"type": "String"
+			},
+			"authorization_key": {
+				"type": "String",
+				"defaultValue": "Bearer H2eTnjWF6DUyuhh5SXaYtjie42HSHv_IWbaOk6hIQJo"
+			},
+			"updated_at_max": {
+				"type": "String"
+			},
+			"current_day": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Haravan/Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-12-10T03:21:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

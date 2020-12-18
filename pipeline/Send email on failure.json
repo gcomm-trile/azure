@@ -1,0 +1,56 @@
+{
+	"name": "Send email on failure",
+	"properties": {
+		"activities": [
+			{
+				"name": "Send email on failure",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-05.southeastasia.logic.azure.com:443/workflows/91d73e08f1724eb680d0c2b1b750ee8b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=waRCyKBwQ1ioLdB0Da00oyh1Mv4uMVi1zDoveYJhgsM",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\"EmailTo\": \"@{pipeline().parameters.EmailTo}\",\"Subject\": \"An error has occured in the @{pipeline().Pipeline}-pipeline\",\"DataFactoryName\": \"@{pipeline().DataFactory}\",\"PipelineName\": \"@{pipeline().Pipeline}\",\"Activity\": \"@{pipeline().parameters.Activity}\",\"ErrorMessage\": \"@{pipeline().parameters.ErrorMessage}\"}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"EmailTo": {
+				"type": "string",
+				"defaultValue": "tri.le@gcomm.com.vn"
+			},
+			"Activity": {
+				"type": "string",
+				"defaultValue": "[f_Activity]"
+			},
+			"ErrorMessage": {
+				"type": "string",
+				"defaultValue": "[f_ErrorMessage]"
+			},
+			"PipelineName": {
+				"type": "string",
+				"defaultValue": "[f_PipelineName]"
+			},
+			"DataFactoryName": {
+				"type": "string",
+				"defaultValue": "[f_DataFactoryName]"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-22T04:00:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

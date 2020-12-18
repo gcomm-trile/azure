@@ -1,0 +1,844 @@
+{
+	"name": "Palaxy By Date",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach Store",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "store_plx",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set start date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set end date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('store_plx').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Male 7",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "m"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "7"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "m",
+										"ageGroup": "7"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx_accompanyquantity_bydate",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Male 2",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "m"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "2"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "m",
+										"ageGroup": "2"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Male 3",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "m"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "3"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "m",
+										"ageGroup": "3"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Male 4",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "m"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "4"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "m",
+										"ageGroup": "4"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Male 8",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "m"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "8"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "m",
+										"ageGroup": "8"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Female 7",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "f"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "7"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "f",
+										"ageGroup": "7"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Female 2",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "f"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "2"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "f",
+										"ageGroup": "2"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Female 3",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "f"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "3"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "f",
+										"ageGroup": "3"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Female 4",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "f"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "4"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "f",
+										"ageGroup": "4"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Female 8",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"api_key": "VOKF1MT.IONzXTRZBDAIwYvI6LWnaVk9jd7QrZfJwDIRhc7K2Hm3K1Iwrc"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"sqlWriterStoredProcedureName": "[dbo].[spOverwrite_staging_stores_plx_accompanyquantity_bydate]",
+									"sqlWriterTableType": "staging_stores_plx_accompanyquantity_bydate_Type",
+									"storedProcedureTableTypeParameterName": "staging_stores_plx_accompanyquantity_bydate",
+									"storedProcedureParameters": {
+										"store_id": {
+											"type": "Int32",
+											"value": {
+												"value": "@item().id",
+												"type": "Expression"
+											}
+										},
+										"gender": {
+											"type": "String",
+											"value": "f"
+										},
+										"age_group": {
+											"type": "Int16",
+											"value": "8"
+										}
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mapComplexValuesToString": false
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "plx_reportStoreByDate",
+									"type": "DatasetReference",
+									"parameters": {
+										"startDate": "@variables('startDate')",
+										"endDate": "@variables('endDate')",
+										"storeId": "@string(item().id)",
+										"gender": "f",
+										"ageGroup": "8"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_stores_plx",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "store_plx",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "sqlstg_stores_plx",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Set start date",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "startDate",
+					"value": {
+						"value": "@concat(formatDateTime(adddays(utcnow(),-7),'yyyyMMdd'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set end date",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "endDate",
+					"value": {
+						"value": "@concat(formatDateTime(adddays(utcnow(),0),'yyyyMMdd'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "run sp_updateVisitorAccompanyquantityBydate",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ForEach Store",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateVisitorAccompanyquantityByDate]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"variables": {
+			"startDate": {
+				"type": "String"
+			},
+			"endDate": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Palaxy"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-05T09:07:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,28 @@
+{
+	"name": "hrv_Order_Ids",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HaravanAPI",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ids": {
+				"type": "string",
+				"defaultValue": " "
+			}
+		},
+		"folder": {
+			"name": "Order"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('orders.json?ids=',dataset().ids)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

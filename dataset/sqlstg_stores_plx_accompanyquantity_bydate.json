@@ -1,0 +1,55 @@
+{
+	"name": "sqlstg_stores_plx_accompanyquantity_bydate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Palaxy"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "date"
+			},
+			{
+				"name": "store_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gender",
+				"type": "varchar"
+			},
+			{
+				"name": "age_group",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "quantity",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "accompanyQuantity",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "label",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_stores_plx_accompanyquantity_bydate"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

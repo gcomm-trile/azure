@@ -1,0 +1,59 @@
+{
+	"name": "ex_Excution_Measurement",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Execution"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Excution_measurement",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Ket qua danh gia chuan thuc thi.xlsx",
+				"folderPath": "Excutions",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Mã chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Tên chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Nhóm tiêu chí",
+				"type": "String"
+			},
+			{
+				"name": "Mã tiêu chí",
+				"type": "String"
+			},
+			{
+				"name": "Đối tượng/ khu vực đánh giá",
+				"type": "String"
+			},
+			{
+				"name": "Tiêu chí",
+				"type": "String"
+			},
+			{
+				"name": "Hướng dẫn đánh giá/ Mô tả tiêu chí",
+				"type": "String"
+			},
+			{
+				"name": "Điểm tiêu chí",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

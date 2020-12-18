@@ -1,0 +1,76 @@
+{
+	"name": "sqlstg_CampaignExcel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Campaign"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Mã chương trình",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tên chương trình",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mô tả",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mã KM Haravan",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nhóm chương trình",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Hình thức KM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Từ",
+				"type": "date"
+			},
+			{
+				"name": "Đến",
+				"type": "date"
+			},
+			{
+				"name": "Ngân sách",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Mục tiêu",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Chỉ tiêu",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Áp dụng",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Thực chi",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_campaign"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

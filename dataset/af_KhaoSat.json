@@ -1,0 +1,30 @@
+{
+	"name": "af_KhaoSat",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_Function",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"surveyId": {
+				"type": "string"
+			},
+			"page": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "khaosat"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('flattenKhaosat?surveyId=',dataset().surveyId,'&page=',dataset().page)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,55 @@
+{
+	"name": "ex_Execution",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Execution"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Execution",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Quan ly chuan thuc thi.xlsx",
+				"folderPath": "Excutions",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Mã chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Tên chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Bắt đầu",
+				"type": "String"
+			},
+			{
+				"name": "Kết thúc",
+				"type": "String"
+			},
+			{
+				"name": "Cửa hàng đạt chuẩn",
+				"type": "String"
+			},
+			{
+				"name": "Cửa hàng loại Khá",
+				"type": "String"
+			},
+			{
+				"name": "Cửa hàng cần cải thiện",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

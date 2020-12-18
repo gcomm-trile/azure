@@ -1,0 +1,225 @@
+{
+	"name": "t_customer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Customers/customers",
+				"fileSystem": "couplegroupfiles"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"customers": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"accepts_marketing": {
+								"type": "boolean"
+							},
+							"addresses": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"address1": {
+											"type": "string"
+										},
+										"address2": {
+											"type": "null"
+										},
+										"city": {
+											"type": "null"
+										},
+										"company": {
+											"type": "null"
+										},
+										"country": {
+											"type": "string"
+										},
+										"first_name": {
+											"type": "string"
+										},
+										"id": {
+											"type": "integer"
+										},
+										"last_name": {
+											"type": "string"
+										},
+										"phone": {
+											"type": "string"
+										},
+										"province": {
+											"type": "string"
+										},
+										"zip": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"province_code": {
+											"type": "string"
+										},
+										"country_code": {
+											"type": "string"
+										},
+										"default": {
+											"type": "boolean"
+										},
+										"district": {
+											"type": "string"
+										},
+										"district_code": {
+											"type": "string"
+										},
+										"ward": {
+											"type": "string"
+										},
+										"ward_code": {
+											"type": "string"
+										}
+									}
+								}
+							},
+							"created_at": {
+								"type": "string"
+							},
+							"default_address": {
+								"type": "object",
+								"properties": {
+									"address1": {
+										"type": "string"
+									},
+									"address2": {
+										"type": "null"
+									},
+									"city": {
+										"type": "null"
+									},
+									"company": {
+										"type": "null"
+									},
+									"country": {
+										"type": "string"
+									},
+									"first_name": {
+										"type": "string"
+									},
+									"id": {
+										"type": "integer"
+									},
+									"last_name": {
+										"type": "string"
+									},
+									"phone": {
+										"type": "string"
+									},
+									"province": {
+										"type": "string"
+									},
+									"zip": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"province_code": {
+										"type": "string"
+									},
+									"country_code": {
+										"type": "string"
+									},
+									"default": {
+										"type": "boolean"
+									},
+									"district": {
+										"type": "string"
+									},
+									"district_code": {
+										"type": "string"
+									},
+									"ward": {
+										"type": "string"
+									},
+									"ward_code": {
+										"type": "string"
+									}
+								}
+							},
+							"email": {
+								"type": "null"
+							},
+							"phone": {
+								"type": "string"
+							},
+							"first_name": {
+								"type": "string"
+							},
+							"id": {
+								"type": "integer"
+							},
+							"multipass_identifier": {
+								"type": "null"
+							},
+							"last_name": {
+								"type": "string"
+							},
+							"last_order_id": {
+								"type": "integer"
+							},
+							"last_order_name": {
+								"type": "string"
+							},
+							"note": {
+								"type": "null"
+							},
+							"orders_count": {
+								"type": "integer"
+							},
+							"state": {
+								"type": "string"
+							},
+							"tags": {
+								"type": "null"
+							},
+							"total_spent": {
+								"type": "number"
+							},
+							"total_paid": {
+								"type": "number"
+							},
+							"updated_at": {
+								"type": "string"
+							},
+							"verified_email": {
+								"type": "boolean"
+							},
+							"group_name": {
+								"type": "null"
+							},
+							"birthday": {
+								"type": "string"
+							},
+							"gender": {
+								"type": "integer"
+							},
+							"last_order_date": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

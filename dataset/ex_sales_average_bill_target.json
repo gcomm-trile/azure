@@ -1,0 +1,26 @@
+{
+	"name": "ex_sales_average_bill_target",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SaleTarget"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Average bill",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Muc tieu kinh doanh.xlsx",
+				"folderPath": "Sales",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,19 @@
+{
+	"name": "data_email_tonkho",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "tonkho_download_by_email/data_excel",
+				"fileSystem": "haravan"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

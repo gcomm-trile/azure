@@ -1,0 +1,721 @@
+{
+	"name": "Load Old_Order",
+	"properties": {
+		"activities": [
+			{
+				"name": "Order",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "olddata_order",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_order",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['order_id']"
+								},
+								"sink": {
+									"name": "order_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_number']"
+								},
+								"sink": {
+									"name": "order_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['source_name']"
+								},
+								"sink": {
+									"name": "source_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['store_id']"
+								},
+								"sink": {
+									"name": "store_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['user_id']"
+								},
+								"sink": {
+									"name": "user_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['email']"
+								},
+								"sink": {
+									"name": "email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['customer_id']"
+								},
+								"sink": {
+									"name": "customer_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['gateway']"
+								},
+								"sink": {
+									"name": "gateway",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['currency']"
+								},
+								"sink": {
+									"name": "currency",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['financial_status']"
+								},
+								"sink": {
+									"name": "financial_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ref_order_id']"
+								},
+								"sink": {
+									"name": "ref_order_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['confirmed_status']"
+								},
+								"sink": {
+									"name": "confirmed_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['confirmed_at']"
+								},
+								"sink": {
+									"name": "confirmed_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cancelled_status']"
+								},
+								"sink": {
+									"name": "cancelled_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cancelled_at']"
+								},
+								"sink": {
+									"name": "cancelled_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['cancelled_reason']"
+								},
+								"sink": {
+									"name": "cancelled_reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_status']"
+								},
+								"sink": {
+									"name": "closed_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closed_at']"
+								},
+								"sink": {
+									"name": "closed_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['discount_code']"
+								},
+								"sink": {
+									"name": "discount_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['discount_amount']"
+								},
+								"sink": {
+									"name": "discount_amount",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['discount_type']"
+								},
+								"sink": {
+									"name": "discount_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['discount_is_coupon_code']"
+								},
+								"sink": {
+									"name": "discount_is_coupon_code",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_weight']"
+								},
+								"sink": {
+									"name": "total_weight",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['subtotal_price']"
+								},
+								"sink": {
+									"name": "subtotal_price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_line_items_price']"
+								},
+								"sink": {
+									"name": "total_line_items_price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_discounts']"
+								},
+								"sink": {
+									"name": "total_discounts",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_tax']"
+								},
+								"sink": {
+									"name": "total_tax",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_price']"
+								},
+								"sink": {
+									"name": "total_price",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_fee']"
+								},
+								"sink": {
+									"name": "shipping_fee",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['landing_site']"
+								},
+								"sink": {
+									"name": "landing_site",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['referring_site']"
+								},
+								"sink": {
+									"name": "referring_site",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['is_offline']"
+								},
+								"sink": {
+									"name": "is_offline",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_address1']"
+								},
+								"sink": {
+									"name": "shipping_address_address1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_address2']"
+								},
+								"sink": {
+									"name": "shipping_address_address2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_city']"
+								},
+								"sink": {
+									"name": "shipping_address_city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_company']"
+								},
+								"sink": {
+									"name": "shipping_address_company",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_country']"
+								},
+								"sink": {
+									"name": "shipping_address_country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_first_name']"
+								},
+								"sink": {
+									"name": "shipping_address_first_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_last_name']"
+								},
+								"sink": {
+									"name": "shipping_address_last_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_latitude']"
+								},
+								"sink": {
+									"name": "shipping_address_latitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_longitude']"
+								},
+								"sink": {
+									"name": "shipping_address_longitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_phone']"
+								},
+								"sink": {
+									"name": "shipping_address_phone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_province']"
+								},
+								"sink": {
+									"name": "shipping_address_province",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_zip']"
+								},
+								"sink": {
+									"name": "shipping_address_zip",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_name']"
+								},
+								"sink": {
+									"name": "shipping_address_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_province_code']"
+								},
+								"sink": {
+									"name": "shipping_address_province_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_country_code']"
+								},
+								"sink": {
+									"name": "shipping_address_country_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_district_code']"
+								},
+								"sink": {
+									"name": "shipping_address_district_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_district']"
+								},
+								"sink": {
+									"name": "shipping_address_district",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_ward_code']"
+								},
+								"sink": {
+									"name": "shipping_address_ward_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['shipping_address_ward']"
+								},
+								"sink": {
+									"name": "shipping_address_ward",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_used_amount']"
+								},
+								"sink": {
+									"name": "redeem_model_used_amount",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_discount_type']"
+								},
+								"sink": {
+									"name": "redeem_model_discount_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_discount']"
+								},
+								"sink": {
+									"name": "redeem_model_discount",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_max_per_order']"
+								},
+								"sink": {
+									"name": "redeem_model_max_per_order",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_amount']"
+								},
+								"sink": {
+									"name": "redeem_model_amount",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['redeem_model_name']"
+								},
+								"sink": {
+									"name": "redeem_model_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['landing_site_ref']"
+								},
+								"sink": {
+									"name": "landing_site_ref",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['refund']"
+								},
+								"sink": {
+									"name": "refund",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_bill']"
+								},
+								"sink": {
+									"name": "total_bill",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['note']"
+								},
+								"sink": {
+									"name": "note",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['is_promotion']"
+								},
+								"sink": {
+									"name": "is_promotion",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['page']"
+								},
+								"sink": {
+									"name": "page",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['utm_source']"
+								},
+								"sink": {
+									"name": "utm_source",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['utm_medium']"
+								},
+								"sink": {
+									"name": "utm_medium",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['utm_campaign']"
+								},
+								"sink": {
+									"name": "utm_campaign",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['utm_term']"
+								},
+								"sink": {
+									"name": "utm_term",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['utm_content']"
+								},
+								"sink": {
+									"name": "utm_content",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['pos_date']"
+								},
+								"sink": {
+									"name": "pos_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['fulfillment_status']"
+								},
+								"sink": {
+									"name": "fulfillment_status",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "js_OrderOld",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_order",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Load Old Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-23T06:59:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,70 @@
+{
+	"name": "sqldim_luongphanbodonhang",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Luồng phân bổ đơn hàng"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "store_recoded_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_source_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "source_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "utm_source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "note",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_per_sku",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "customer_is_wholesale",
+				"type": "nvarchar"
+			},
+			{
+				"name": "priority",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_recoded_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_source_id",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dim_luongphanbo_donhang"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

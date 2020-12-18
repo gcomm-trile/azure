@@ -1,0 +1,147 @@
+{
+	"name": "Full",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL Store",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL Store",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL Product from Haravan",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL Store",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL Product from Haravan",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL Orders",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL Product from Haravan",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL Orders",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL khaosat",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL khaosat",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL after Order",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL Orders",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL after Order",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Send email on failure",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL Store",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "ETL Product from Haravan",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "ETL Orders",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "ETL after Order",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "ETL khaosat",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Send email on failure",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"EmailTo": "tri.le@gcomm.com.vn",
+						"Activity": "Full",
+						"ErrorMessage": "An error has occured",
+						"PipelineName": "Full",
+						"DataFactoryName": "Full"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2020-09-22T04:00:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

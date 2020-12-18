@@ -1,0 +1,66 @@
+{
+	"name": "sqlstg_tonkhodownloadhangngay_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Tên chi nhánh",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Quận/Huyện",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tỉnh/TP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sản phẩm",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SKU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Barcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Số lượng tồn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Số lượng đặt",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Số lượng mua",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Số lượng khả dụng",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trạng thái tồn kho",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_tonkhodownloadhangngay_excel"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

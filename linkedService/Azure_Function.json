@@ -1,0 +1,18 @@
+{
+	"name": "Azure_Function",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Azure_Function",
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://couplegroupfunction.azurewebsites.net/api/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

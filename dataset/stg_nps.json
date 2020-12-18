@@ -1,0 +1,59 @@
+{
+	"name": "stg_nps",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Question_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Question_label",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Answer_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Answer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Date_created",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Info_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Info_value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Info_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "page",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_nps"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

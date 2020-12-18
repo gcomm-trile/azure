@@ -1,0 +1,56 @@
+{
+	"name": "sqlstg_order_refund_transaction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Order"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "refund_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "location_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "amount",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "created_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "page",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_order_refund_transaction"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,100 @@
+{
+	"name": "sqlstg_sales_targetsale",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SaleTarget"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "STT",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Store_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Store_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Jan",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Feb",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Mar",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Apr",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "May",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Jun",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Jul",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Aug",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Sep",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Oct",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Nov",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Dec",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_sales_targetsale"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

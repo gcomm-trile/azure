@@ -1,0 +1,1074 @@
+{
+	"name": "ETL Execution",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load execution excel",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_execution",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã chương trình",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "campaign_no",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chương trình",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "campaign_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Bắt đầu",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "date_begin",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Kết thúc",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "date_end",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Cửa hàng đạt chuẩn",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "result_good",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cửa hàng loại Khá",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "result_meet",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cửa hàng cần cải thiện",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "result_needimprove",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Execution",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_Exectuion",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Load execution criteria excel",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_exectuion_criteria",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã chương trình",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "campaign_no",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chương trình",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "campaign_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Mã tiêu chí",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "criteria_no",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tiêu chí",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "criteria_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Nhóm tiêu chí",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "criteria_group",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Đối tượng/ khu vực đánh giá",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "evaluated_objects",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Hướng dẫn đánh giá/ Mô tả tiêu chí",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "criteria_description",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Điểm tiêu chí",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "max_point",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Execution_Criteria",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_Exectuion_Criteria",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "run sp_updateExecution",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Load execution excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load execution criteria excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load execution measurement excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateExecution]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Load execution measurement excel",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table staging_execution_measurement",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã cửa hàng",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "store_no",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên cửa hàng",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "store_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Mã chương trình"
+								},
+								"sink": {
+									"name": "campaign_no",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên chương trình"
+								},
+								"sink": {
+									"name": "campaign_name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Kì đánh giá",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "evaluated_wave",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngày đánh giá",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "evaluted_date",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Người đánh giá",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "evaluted_by",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tổng điểm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "total",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC01",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC01",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC02",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC02",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC03",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC03",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC04",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC04",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC05",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC05",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC06",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC06",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC07",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC07",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC08",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC08",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC09",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC09",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC10",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC11",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC11",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC12",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC12",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC13",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC13",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC14",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC14",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC15",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC15",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC16",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC16",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC17",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC17",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC18",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC18",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC19",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC19",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC20",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC20",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC21",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC21",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC22",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC22",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC23",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC23",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC24",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC24",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC25",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC25",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC26",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC26",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC27",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC27",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC28",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC28",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC29",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC29",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC30",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC30",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC31",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC31",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC32",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC32",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC33",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC33",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC34",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC34",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC35",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC35",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC36",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC36",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC37",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC37",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC38",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC38",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC39",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC39",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC40",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC40",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC41",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC41",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC42",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC42",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC43",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC43",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC44",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC44",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC45",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC45",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC46",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC46",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC47",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC47",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC48",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC48",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC49",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC49",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TC50",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TC50",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Excution_Measurement",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_Execution_Measurement",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Execution"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-24T04:33:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

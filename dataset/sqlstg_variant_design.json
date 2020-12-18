@@ -1,0 +1,112 @@
+{
+	"name": "sqlstg_variant_design",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "variant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "variant_barcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_price_listing",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "variant_option1_tittle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_option1_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "variant_option2_tittle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_option2_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "variant_option3_tittle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "variant_option3_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "variant_image_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "product_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "product_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_vendor_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_category_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_image",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_handle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_published_scope",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_tags",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_template_suffix",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_variant_design"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

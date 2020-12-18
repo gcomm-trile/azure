@@ -1,0 +1,328 @@
+{
+	"name": "Load Product from DL2DW",
+	"properties": {
+		"activities": [
+			{
+				"name": "Polybase from DataLake2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "product",
+							"wildcardFileName": "*.Parquet",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate TABLE dbo.staging_product",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "variant_id",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "variant_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_barcode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_barcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_sku",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_sku",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_title",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_price_listing",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "variant_price_listing",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option1_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option1_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option1_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option1_value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option2_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option2_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option2_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option2_value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option3_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option3_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_option3_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_option3_value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "variant_image_id",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "variant_image_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "product_id",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "product_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "product_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_vendor_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_vendor_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_category_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_category_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_image",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_image",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_handle",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_handle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_published_scope",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_published_scope",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_tags",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_tags",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_template_suffix",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_template_suffix",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "prq_ProductAll",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_product",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "run sp_updateProduct",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Load excel file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateProduct]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Load excel file",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Polybase from DataLake2DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load excel file",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Haravan/Product"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-26T06:59:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

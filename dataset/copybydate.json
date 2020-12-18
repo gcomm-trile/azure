@@ -1,0 +1,23 @@
+{
+	"name": "copybydate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('oldFiles/orders/',formatDateTime(addhours(utcnow(),14),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "haravan"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

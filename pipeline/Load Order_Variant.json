@@ -1,0 +1,162 @@
+{
+	"name": "Load Order_Variant",
+	"properties": {
+		"activities": [
+			{
+				"name": "Polybase from DataLake2DW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:30:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate TABLE dbo.staging_order_variant",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['line_items_id']"
+								},
+								"sink": {
+									"name": "line_items_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_id']"
+								},
+								"sink": {
+									"name": "variant_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['order_id']"
+								},
+								"sink": {
+									"name": "order_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['qty']"
+								},
+								"sink": {
+									"name": "qty",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['price_selling']"
+								},
+								"sink": {
+									"name": "price_selling",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"path": "$['price_promotion']"
+								},
+								"sink": {
+									"name": "price_promotion",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_discount']"
+								},
+								"sink": {
+									"name": "total_discount",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties_name']"
+								},
+								"sink": {
+									"name": "properties_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties_value']"
+								},
+								"sink": {
+									"name": "properties_value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['barcode']"
+								},
+								"sink": {
+									"name": "barcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['page']"
+								},
+								"sink": {
+									"name": "page",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "af_Order_Variant",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_order_variant",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Haravan/Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-10T06:55:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

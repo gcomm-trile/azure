@@ -1,0 +1,129 @@
+{
+	"name": "sqlstg_StoreExcel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Store"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_acronym",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wholesale",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "warehouse",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_group",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_format",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_segment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "opening_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "closed_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mail",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_asm",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_manager",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_area",
+				"type": "nvarchar"
+			},
+			{
+				"name": "number_of_staff",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "address1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ward",
+				"type": "nvarchar"
+			},
+			{
+				"name": "district",
+				"type": "nvarchar"
+			},
+			{
+				"name": "province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "channel",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_store_excel"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

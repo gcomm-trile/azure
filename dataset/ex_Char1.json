@@ -1,0 +1,35 @@
+{
+	"name": "ex_Char1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "BST",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "MasterProduction.xlsx",
+				"folderPath": "Products",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "collection_name",
+				"type": "String"
+			},
+			{
+				"name": "date_create",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,31 @@
+{
+	"name": "t_customer_db",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "customerid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gender",
+				"type": "bit"
+			},
+			{
+				"name": "dob",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "t_customers"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

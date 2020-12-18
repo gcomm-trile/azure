@@ -1,0 +1,526 @@
+{
+	"name": "ETL Store",
+	"properties": {
+		"activities": [
+			{
+				"name": "Download Store Excel",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy DL to Staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE staging_store_excel",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Store_key",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_no",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_acronym",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_acronym",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Whosale",
+									"type": "String"
+								},
+								"sink": {
+									"name": "wholesale",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Warehouse",
+									"type": "String"
+								},
+								"sink": {
+									"name": "warehouse",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_group",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_group",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_format",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_format",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "store_level",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_segment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Opening_date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "opening_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Closed_date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "closed_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Phone",
+									"type": "String"
+								},
+								"sink": {
+									"name": "phone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Mail",
+									"type": "String"
+								},
+								"sink": {
+									"name": "mail",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_asm",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_asm",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Store_manager",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_manager",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Area",
+									"type": "String"
+								},
+								"sink": {
+									"name": "store_area",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Number_of_staff",
+									"type": "String"
+								},
+								"sink": {
+									"name": "number_of_staff",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Address1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "address1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Address2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "address2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ward",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ward",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "District",
+									"type": "String"
+								},
+								"sink": {
+									"name": "district",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Province",
+									"type": "String"
+								},
+								"sink": {
+									"name": "province",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Country",
+									"type": "String"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Channel",
+									"type": "String"
+								},
+								"sink": {
+									"name": "channel"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Store",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_StoreExcel",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Run sp_updateStore",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Download Store Excel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_updateStore]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Download Shop API",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"Content-Type": "application/json",
+							"Authorization": {
+								"value": "@variables('authorization_key')",
+								"type": "Expression"
+							}
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "hrv_Store",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dl_storeJson",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy DL to Staging",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Download Shop API",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE staging_store",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['address1']"
+								},
+								"sink": {
+									"name": "address1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['address2']"
+								},
+								"sink": {
+									"name": "address2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['province']"
+								},
+								"sink": {
+									"name": "province",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['district']"
+								},
+								"sink": {
+									"name": "district",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['ward']"
+								},
+								"sink": {
+									"name": "ward",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['locations']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dl_storeJson",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_Store",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"variables": {
+			"authorization_key": {
+				"type": "String",
+				"defaultValue": "Bearer H2eTnjWF6DUyuhh5SXaYtjie42HSHv_IWbaOk6hIQJo"
+			}
+		},
+		"folder": {
+			"name": "Haravan/Store"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-23T08:24:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

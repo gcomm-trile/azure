@@ -1,0 +1,155 @@
+{
+	"name": "Load Orders full",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load Order",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Order",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Fullfillment",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Load Order",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Fullfillment",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Refund",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Load Order",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Refund",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Order_Variant",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Load Order",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Order_Variant",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Customer",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Load Order",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Customer",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Run SQL After Load Order",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Load Fullfillment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load Refund",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load Order_Variant",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Load Customer",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Run SQL After Load Order",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"updated_at_min": {
+				"type": "String"
+			},
+			"updated_at_max": {
+				"type": "String"
+			},
+			"current_date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Haravan/Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-02T10:40:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

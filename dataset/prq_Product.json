@@ -1,0 +1,33 @@
+{
+	"name": "prq_Product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"page": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('page',dataset().page,'.Parquet')",
+					"type": "Expression"
+				},
+				"folderPath": "product",
+				"fileSystem": "haravan"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

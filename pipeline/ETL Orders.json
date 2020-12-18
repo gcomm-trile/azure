@@ -1,0 +1,46 @@
+{
+	"name": "ETL Orders",
+	"properties": {
+		"activities": [
+			{
+				"name": "Download OrderJson",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Download OrderJson",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Orders",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Download OrderJson",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Load Orders full",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Haravan/Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-22T06:46:57Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,307 @@
+{
+	"name": "Load old customer",
+	"properties": {
+		"activities": [
+			{
+				"name": "Customer",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "olddata_order_customer",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate TABLE dbo.staging_customer",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "staging"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['accepts_marketing']"
+								},
+								"sink": {
+									"name": "accepts_marketing",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['email']"
+								},
+								"sink": {
+									"name": "email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['phone']"
+								},
+								"sink": {
+									"name": "phone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['first_name']"
+								},
+								"sink": {
+									"name": "first_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['customer_id']"
+								},
+								"sink": {
+									"name": "customer_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_name']"
+								},
+								"sink": {
+									"name": "last_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_order_id']"
+								},
+								"sink": {
+									"name": "last_order_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_order_name']"
+								},
+								"sink": {
+									"name": "last_order_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['note']"
+								},
+								"sink": {
+									"name": "note",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['orders_count']"
+								},
+								"sink": {
+									"name": "orders_count",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state']"
+								},
+								"sink": {
+									"name": "state",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tags']"
+								},
+								"sink": {
+									"name": "tags",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_spent']"
+								},
+								"sink": {
+									"name": "total_spent",
+									"type": "Single"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updated_at']"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['group_name']"
+								},
+								"sink": {
+									"name": "group_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['birthday']"
+								},
+								"sink": {
+									"name": "birthday",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['gender']"
+								},
+								"sink": {
+									"name": "gender",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_order_date']"
+								},
+								"sink": {
+									"name": "last_order_date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['company']"
+								},
+								"sink": {
+									"name": "company",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address1']"
+								},
+								"sink": {
+									"name": "address1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address2']"
+								},
+								"sink": {
+									"name": "address2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ward']"
+								},
+								"sink": {
+									"name": "ward",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['district']"
+								},
+								"sink": {
+									"name": "district",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "js_OrderCustomerOld",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_order_customer",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Load Old Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-11-20T08:49:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

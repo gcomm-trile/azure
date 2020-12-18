@@ -1,0 +1,33 @@
+{
+	"name": "hrv_Order",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HaravanAPI",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"index_page": {
+				"type": "string"
+			},
+			"updated_at_min": {
+				"type": "string"
+			},
+			"updated_at_max": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Order"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('orders.json?page=',dataset().index_page,'&updated_at_min=',dataset().updated_at_min,'&updated_at_max=',dataset().updated_at_max)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

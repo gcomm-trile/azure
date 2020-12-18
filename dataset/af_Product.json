@@ -1,0 +1,31 @@
+{
+	"name": "af_Product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_Function",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"page": {
+				"type": "string"
+			},
+			"updated_at_min": {
+				"type": "string",
+				"defaultValue": "2020-6-1T00:00:00.000Z"
+			}
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('flattenProduct?page=',dataset().page,'&updated_at_min=',dataset().updated_at_min)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

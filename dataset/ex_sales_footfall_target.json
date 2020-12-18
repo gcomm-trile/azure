@@ -1,0 +1,87 @@
+{
+	"name": "ex_sales_footfall_target",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SaleTarget"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Footfall",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Muc tieu kinh doanh.xlsx",
+				"folderPath": "Sales",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Year",
+				"type": "String"
+			},
+			{
+				"name": "Store_ID",
+				"type": "String"
+			},
+			{
+				"name": "Store_Name",
+				"type": "String"
+			},
+			{
+				"name": "Jan",
+				"type": "String"
+			},
+			{
+				"name": "Feb",
+				"type": "String"
+			},
+			{
+				"name": "Mar",
+				"type": "String"
+			},
+			{
+				"name": "Apr",
+				"type": "String"
+			},
+			{
+				"name": "May",
+				"type": "String"
+			},
+			{
+				"name": "Jun",
+				"type": "String"
+			},
+			{
+				"name": "Jul",
+				"type": "String"
+			},
+			{
+				"name": "Aug",
+				"type": "String"
+			},
+			{
+				"name": "Sep",
+				"type": "String"
+			},
+			{
+				"name": "Oct",
+				"type": "String"
+			},
+			{
+				"name": "Nov",
+				"type": "String"
+			},
+			{
+				"name": "Dec",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

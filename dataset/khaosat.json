@@ -1,0 +1,35 @@
+{
+	"name": "khaosat",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"survey_id": {
+				"type": "string"
+			},
+			"page": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "khaosat"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().survey_id,'/',dataset().page,'.json')",
+					"type": "Expression"
+				},
+				"folderPath": "khaosat.me",
+				"fileSystem": "haravan"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

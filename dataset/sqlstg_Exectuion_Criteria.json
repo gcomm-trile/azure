@@ -1,0 +1,54 @@
+{
+	"name": "sqlstg_Exectuion_Criteria",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Execution"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "campaign_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "campaign_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "criteria_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "criteria_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "criteria_group",
+				"type": "nvarchar"
+			},
+			{
+				"name": "evaluated_objects",
+				"type": "nvarchar"
+			},
+			{
+				"name": "criteria_description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "max_point",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_exectuion_criteria"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

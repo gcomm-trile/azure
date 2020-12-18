@@ -1,0 +1,271 @@
+{
+	"name": "Copy old product json to parquet",
+	"properties": {
+		"activities": [
+			{
+				"name": "Download data by current page",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "olddata_product",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['variant_id']"
+								},
+								"sink": {
+									"name": "variant_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_barcode']"
+								},
+								"sink": {
+									"name": "variant_barcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_title']"
+								},
+								"sink": {
+									"name": "variant_title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_name']"
+								},
+								"sink": {
+									"name": "variant_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_price_listing']"
+								},
+								"sink": {
+									"name": "variant_price_listing",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option1_tittle']"
+								},
+								"sink": {
+									"name": "variant_option1_tittle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option1_id']"
+								},
+								"sink": {
+									"name": "variant_option1_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option2_tittle']"
+								},
+								"sink": {
+									"name": "variant_option2_tittle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option2_id']"
+								},
+								"sink": {
+									"name": "variant_option2_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option3_tittle']"
+								},
+								"sink": {
+									"name": "variant_option3_tittle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_option3_id']"
+								},
+								"sink": {
+									"name": "variant_option3_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_image_id']"
+								},
+								"sink": {
+									"name": "variant_image_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_id']"
+								},
+								"sink": {
+									"name": "product_id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_name']"
+								},
+								"sink": {
+									"name": "product_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_vendor_name']"
+								},
+								"sink": {
+									"name": "product_vendor_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_category_name']"
+								},
+								"sink": {
+									"name": "product_category_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_image']"
+								},
+								"sink": {
+									"name": "product_image",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_handle']"
+								},
+								"sink": {
+									"name": "product_handle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_published_scope']"
+								},
+								"sink": {
+									"name": "product_published_scope",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_tags']"
+								},
+								"sink": {
+									"name": "product_tags",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['product_template_suffix']"
+								},
+								"sink": {
+									"name": "product_template_suffix",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['variant_sku']"
+								},
+								"sink": {
+									"name": "variant_sku",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "JsonProduct",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "prq_Product",
+						"type": "DatasetReference",
+						"parameters": {
+							"page": {
+								"value": "1",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Load Old Order"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-07-23T08:05:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,305 @@
+{
+	"name": "Load excel file",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load Excel Product",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE dbo.staging_variant_excel",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mã SP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "barcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên SP Rút gọn",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_shortname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tên SP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_fullname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Bộ sưu tập",
+									"type": "String"
+								},
+								"sink": {
+									"name": "collection",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Brand image/ Product roles",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_role",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Must have",
+									"type": "String"
+								},
+								"sink": {
+									"name": "must_have",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngày Outlet"
+								},
+								"sink": {
+									"name": "outlet_date"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngành Hàng",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nhóm Hàng",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_sub_category"
+								}
+							},
+							{
+								"source": {
+									"name": "Chủng Loại",
+									"type": "String"
+								},
+								"sink": {
+									"name": "variant_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Công Nghệ\nVải",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tech_fabric",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Công Nghệ\nIn/Chi tiết",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tech_printing",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Hình In",
+									"type": "String"
+								},
+								"sink": {
+									"name": "print_style",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Product Style",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_style",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nón",
+									"type": "String"
+								},
+								"sink": {
+									"name": "with_hood",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Couple",
+									"type": "String"
+								},
+								"sink": {
+									"name": "is_couple",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Family",
+									"type": "String"
+								},
+								"sink": {
+									"name": "is_family",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Form",
+									"type": "String"
+								},
+								"sink": {
+									"name": "form",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Chất liệu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "material",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Màu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "color",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Nhóm Màu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "color_group",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Giới tính",
+									"type": "String"
+								},
+								"sink": {
+									"name": "gender",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Size",
+									"type": "String"
+								},
+								"sink": {
+									"name": "size",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Giá vốn",
+									"type": "String"
+								},
+								"sink": {
+									"name": "price_cogs",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Ngày chia hàng",
+									"type": "String"
+								},
+								"sink": {
+									"name": "launching_date",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ex_Product",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlstg_product_excel",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Haravan/Product"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-12-10T01:52:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

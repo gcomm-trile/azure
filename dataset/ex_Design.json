@@ -1,0 +1,35 @@
+{
+	"name": "ex_Design",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "design",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Master product.xlsx",
+				"folderPath": "Products",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "collection_name",
+				"type": "String"
+			},
+			{
+				"name": "date_create",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "sqlstg_stores_plx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Palaxy"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "store_id",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "staging_stores_plx"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

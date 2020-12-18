@@ -1,0 +1,159 @@
+{
+	"name": "ex_Product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "MasterProduct",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "MasterProduction.xlsx",
+				"folderPath": "Products",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "No.",
+				"type": "String"
+			},
+			{
+				"name": "Mã SP",
+				"type": "String"
+			},
+			{
+				"name": "Tên SP Rút gọn",
+				"type": "String"
+			},
+			{
+				"name": "Tên SP",
+				"type": "String"
+			},
+			{
+				"name": "Size",
+				"type": "String"
+			},
+			{
+				"name": "Giới tính",
+				"type": "String"
+			},
+			{
+				"name": "Ngành Hàng",
+				"type": "String"
+			},
+			{
+				"name": "Nhóm Hàng",
+				"type": "String"
+			},
+			{
+				"name": "Chủng Loại",
+				"type": "String"
+			},
+			{
+				"name": "Outlet",
+				"type": "String"
+			},
+			{
+				"name": "% Sale",
+				"type": "String"
+			},
+			{
+				"name": "Ngày Outlet",
+				"type": "String"
+			},
+			{
+				"name": "Ngày chia hàng",
+				"type": "String"
+			},
+			{
+				"name": "Nhập",
+				"type": "String"
+			},
+			{
+				"name": "Bán",
+				"type": "String"
+			},
+			{
+				"name": "Tồn",
+				"type": "String"
+			},
+			{
+				"name": "% Bán",
+				"type": "String"
+			},
+			{
+				"name": "Màu",
+				"type": "String"
+			},
+			{
+				"name": "Nhóm Màu",
+				"type": "String"
+			},
+			{
+				"name": "Form",
+				"type": "String"
+			},
+			{
+				"name": "Chất liệu",
+				"type": "String"
+			},
+			{
+				"name": "Hình In",
+				"type": "String"
+			},
+			{
+				"name": "Nón",
+				"type": "String"
+			},
+			{
+				"name": "Couple",
+				"type": "String"
+			},
+			{
+				"name": "Family",
+				"type": "String"
+			},
+			{
+				"name": "Công Nghệ\nVải",
+				"type": "String"
+			},
+			{
+				"name": "Công Nghệ\nIn/Chi tiết",
+				"type": "String"
+			},
+			{
+				"name": "Bộ sưu tập",
+				"type": "String"
+			},
+			{
+				"name": "Brand image/ Product roles",
+				"type": "String"
+			},
+			{
+				"name": "Must have",
+				"type": "String"
+			},
+			{
+				"name": "Product Style",
+				"type": "String"
+			},
+			{
+				"name": "Giá vốn",
+				"type": "String"
+			},
+			{
+				"name": "Giá bán",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

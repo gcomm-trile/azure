@@ -1,0 +1,255 @@
+{
+	"name": "Copy data from excel file haravan email to datalake",
+	"properties": {
+		"activities": [
+			{
+				"name": "get link download",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://couplegroupfunction.azurewebsites.net/api/flattenTonKhoPath",
+					"method": "GET"
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "get link download",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "url",
+					"value": {
+						"value": "@activity('get link download').output.Response",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('url'),'')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Copy link to datalake_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "ExcelSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": "TRUNCATE TABLE dbo.staging_tonkhodownloadhangngay_excel",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Tên chi nhánh",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tên chi nhánh",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Quận/Huyện",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Quận/Huyện",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Tỉnh/TP",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Tỉnh/TP",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Sản phẩm",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Sản phẩm",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "SKU",
+												"type": "String"
+											},
+											"sink": {
+												"name": "SKU",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Barcode",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Barcode",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"name": "Số lượng tồn",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Số lượng tồn",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Số lượng đặt",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Số lượng đặt",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Số lượng mua",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Số lượng mua",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Số lượng khả dụng",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Số lượng khả dụng",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"name": "Trạng thái tồn kho",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Trạng thái tồn kho",
+												"type": "String"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "excel_tonkho_email",
+									"type": "DatasetReference",
+									"parameters": {
+										"url": {
+											"value": "@variables('url')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlstg_tonkhodownloadhangngay_excel",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Send email on failure",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Send email on failure",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"ErrorMessage": ""
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"url": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Haravan/Inventory"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-12-04T04:31:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

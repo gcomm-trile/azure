@@ -1,0 +1,34 @@
+{
+	"name": "dim_Form",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Product"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "collection_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "collection_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dim_variant_form"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

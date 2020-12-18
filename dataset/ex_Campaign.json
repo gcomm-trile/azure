@@ -1,0 +1,75 @@
+{
+	"name": "ex_Campaign",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Campaign"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Promotion",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Quan ly chuong trinh KM.xlsx",
+				"folderPath": "Campaigns",
+				"fileSystem": "couplegroupfiles"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Mã chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Tên chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Mô tả",
+				"type": "String"
+			},
+			{
+				"name": "Mã KM Haravan",
+				"type": "String"
+			},
+			{
+				"name": "Nhóm chương trình",
+				"type": "String"
+			},
+			{
+				"name": "Hình thức KM",
+				"type": "String"
+			},
+			{
+				"name": "Từ",
+				"type": "String"
+			},
+			{
+				"name": "Đến",
+				"type": "String"
+			},
+			{
+				"name": "Ngân sách",
+				"type": "String"
+			},
+			{
+				"name": "Mục tiêu",
+				"type": "String"
+			},
+			{
+				"name": "Chỉ tiêu",
+				"type": "String"
+			},
+			{
+				"name": "Áp dụng",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
