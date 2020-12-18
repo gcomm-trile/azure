@@ -1,0 +1,3 @@
+- HR xem danh gia performance tu cac du an FW trong tab chi tiet danh gia HR PTE Detail
+- code list qc remind / qc cancel
+- dashboard theo month/ project: so du an thuc hien, sample size, count ok, count cancel, count fi...
